@@ -9,7 +9,8 @@
  * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
  * project should be imported as the rest are just wasting space.
  */
-
+@import '../app/club/club.less';
+@import '../../vendor/angular-grid/ng-grid.less';
 @import '../../vendor/bootstrap/less/mixins.less';
 @import '../../vendor/bootstrap/less/reset.less';
 @import '../../vendor/bootstrap/less/utilities.less';
@@ -37,12 +38,7 @@
  * Typography
  */
 
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Regular'), local('Roboto-Regular'), url(fonts/Roboto-Regular.woff) format('woff');
-}
+
 
 code, pre, .pre {
   padding: 5px;

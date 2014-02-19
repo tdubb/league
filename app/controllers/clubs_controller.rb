@@ -8,22 +8,13 @@ class ClubsController < ApplicationController
   # GET /clubs.json
   def index
     @clubs = Club.all
-    render json: @clubs
+    render_with_protection @clubs
   end
 
   # GET /clubs/1
   # GET /clubs/1.json
   def show
-    render json: @club
-  end
-
-  # GET /clubs/new
-  def new
-    @club = Club.new
-  end
-
-  # GET /clubs/1/edit
-  def edit
+    render_with_protection @club
   end
 
   # POST /clubs
@@ -31,22 +22,20 @@ class ClubsController < ApplicationController
   def create
     @club = Club.new(club_params)
 
-
     if @club.save
-      render json: @club, status: :created
+      render_with_protection @club, { status: :created }
     else
-      render json: @club.errors, status: :unprocessable_entity
+      render_with_protection @club.errors, { status: :unprocessable_entity }
     end
-
   end
 
   # PATCH/PUT /clubs/1
   # PATCH/PUT /clubs/1.json
   def update
     if @club.update(club_params)
-      head :no_content 
+      render_with_protection @club
     else
-      render json: @club.errors, status: :unprocessable_entity 
+      render_with_protection @club.errors, { status: :unprocessable_entity }
     end
   end
 
@@ -54,7 +43,8 @@ class ClubsController < ApplicationController
   # DELETE /clubs/1.json
   def destroy
     @club.destroy
-    head :no_content 
+
+    head :no_content
   end
 
   private
@@ -68,3 +58,4 @@ class ClubsController < ApplicationController
       params.require(:club).permit(:name, :contact_officer, :date_created)
     end
 end
+
